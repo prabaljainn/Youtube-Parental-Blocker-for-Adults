@@ -1,9 +1,16 @@
-from pywinauto import Application 		#pywinauto grabs the current tab information
+from pywinauto import Application 			#pywinauto grabs the current tab information
 import os
 import time 								#OS Module to Shut down Chrome
+__time  = 70
+__website = "youtube"
+
+
+print(f"Script Activated for: {__website} for : {__time} seconds of parental lock")
 
 
 def kill_function():
+	global __time
+	global __website
 	try:	
 		app = Application(backend='uia') 		#an application may be using Win32/UIA backend i just tried and chose uia 
 		app.connect(title_re=".*Chrome.*")		#Chrome is what we are looking for
@@ -12,12 +19,12 @@ def kill_function():
 
 		url = dlg.child_window(title=element_name, control_type="Edit").get_value() # get url from database
 		
-		if "youtube"  in url :
+		if __website  in url :
 			val1 = time.perf_counter()
 			
-			time.sleep(2700)   #2700 is 45mins in seconds
+			time.sleep(__time)   #2700 is 45mins in seconds
 
-			if (time.perf_counter() - val1 > 2700 ) and ("youtube" in dlg.child_window(title=element_name, control_type="Edit").get_value() ):
+			if (time.perf_counter() - val1 > __time) and (__website in dlg.child_window(title=element_name, control_type="Edit").get_value() ):
 				os.system("taskkill /im chrome.exe /f") #simply kills the chrome if you are viewing chromes
 	except Exception as e:
 		# print(e)
