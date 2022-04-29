@@ -1,8 +1,14 @@
 from pywinauto import Application 			#pywinauto grabs the current tab information
 import os
 import time 								#OS Module to Shut down Chrome
-__time  = 70
-__website = "youtube"
+import yaml
+
+with open("settings.yml", "r") as ymlfile:
+    configs = yaml.safe_load(ymlfile)
+
+
+__time  = configs["scriptSettings"]["time"]
+__website = configs["scriptSettings"]["website"]
 
 
 print(f"Script Activated for: {__website} for : {__time} seconds of parental lock")
