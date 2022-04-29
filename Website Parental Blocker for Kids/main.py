@@ -12,17 +12,18 @@ def kill_function():
 
 		url = dlg.child_window(title=element_name, control_type="Edit").get_value() # get url from database
 		
-		if "moodle"  in url :
+		if "youtube"  in url :
 			val1 = time.perf_counter()
 			
-			time.sleep(2)
+			time.sleep(2700)   #2700 is 45mins in seconds
 
-			if (time.perf_counter() - val1 > 1 ) and ("moodle" in dlg.child_window(title=element_name, control_type="Edit").get_value() ):
+			if (time.perf_counter() - val1 > 2700 ) and ("youtube" in dlg.child_window(title=element_name, control_type="Edit").get_value() ):
 				os.system("taskkill /im chrome.exe /f") #simply kills the chrome if you are viewing chromes
 	except Exception as e:
-		print(e)
+		# print(e)
+
 		# time.sleep(100)
-		# pass
+		pass
 
 while True:
 	kill_function()
